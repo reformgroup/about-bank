@@ -3,4 +3,5 @@ ru:
     individuals: "Частным клиентам"
     companies: "Для бизнеса"
     banks: "Банкам"
-    sign_up: "Войти"
+    sign_up: "Регистрация"
+    log_in: "Войти"
