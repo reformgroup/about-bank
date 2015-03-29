@@ -11,9 +11,9 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <%= header_main_links :individuals %>
+		<%= header_main_links :companies %>
+		<%= header_main_links :banks %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	    <li class="dropdown">
@@ -24,7 +24,7 @@
 			<% end %>
           </ul>
         </li>
-        <li><a href="#sign_in">Sign in</a></li>
+        <li><a href="#sign_in"><%= I18n.t "main_pages.sign_up" %></a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

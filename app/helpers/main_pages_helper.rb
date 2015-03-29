@@ -9,4 +9,12 @@ module MainPagesHelper
       "#{base_title} | #{page_title}"
     end
   end
+  
+  def header_main_links(name)
+    if current_page?(controller: "main_pages", action: name)
+      content_tag(:li, class: "active") { link_to(I18n.t("main_pages.#{name}"), "#") }
+    else
+      content_tag(:li) { link_to(I18n.t("main_pages.#{name}"), { controller: "main_pages", action: name }) }
+    end
+  end
 end

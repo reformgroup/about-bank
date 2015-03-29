@@ -1,5 +1,11 @@
 class MainPagesController < ApplicationController
-  def home
+  def individuals
+  end
+  
+  def companies
+  end
+  
+  def banks
   end
 
   def help
