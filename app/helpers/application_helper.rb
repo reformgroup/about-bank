@@ -1,6 +1,6 @@
 module ApplicationHelper
   
-  LOCALE_LIST = { ru: "Русский", en: "English" }
+  LOCALE_LIST = { en: "English", ru: "Русский" }
   
   def current_locale_name
     LOCALE_LIST[I18n.locale]
