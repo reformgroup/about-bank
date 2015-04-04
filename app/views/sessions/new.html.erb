@@ -1,0 +1,22 @@
+<% provide(:title, I18n.t("login.title")) %>
+
+<div class="row">
+	<div class="col-<%= default_grid_system %>-4 pull-right">
+		<div class="panel panel-default">
+		  <div class="panel-body">
+			  <h3><%= I18n.t("login.title") %></h3>
+			  	<hr>
+				<%= form_for(:session, url: sessions_path, html: { class: "form" }) do |f| %>
+					<div class="form-group">
+						<%= f.text_field :email, class: "form-control", placeholder: I18n.t("helpers.label.user.email") %>
+					</div>
+					<div class="form-group">
+						<%= f.password_field :password, class: "form-control", placeholder: I18n.t("helpers.label.user.password") %>
+					</div>
+					<%= f.submit nil, class: "btn btn-large btn-primary" %>
+					<%= link_to I18n.t("login.forgot_password_link"), "#" %>
+			    <% end %>
+			</div>
+		</div>
+	</div>
+</div>

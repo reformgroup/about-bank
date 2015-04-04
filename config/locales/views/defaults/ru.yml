@@ -1,0 +1,14 @@
+ru:
+  helpers:
+    label:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        email: "Адрес электронной почты"
+        password: "Пароль"
+        password_confirmation: "Ещё раз пароль"
+    submit:
+      user:
+        create: "Зарегистрироваться"
+      session:
+        submit: "Войти"

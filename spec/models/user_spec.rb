@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+RSpec.describe User, :type => :model do
 
   before { @user = User.new(first_name: "Ivan", last_name: "Ivanov", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar") }
@@ -13,11 +13,32 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   
   it { should be_valid }
+
+  context "when first name format is invalid" do
+    it "should be invalid" do
+      name = %w[foo123 ,foo foo,bar]
+      name.each do |invalid_name|
+        @user.first_name = invalid_name
+        expect(@user).not_to be_valid
+      end
+    end
+  end
   
-  describe "email address with mixed case" do
+  context "when first name format is valid" do
+    it "should be valid" do
+      name = %w[Foo fOO foo Foo-Bar]
+      name.each do |valid_name|
+        @user.first_name = valid_name
+        expect(@user).to be_valid
+      end
+    end
+  end
+  
+  context "email address with mixed case" do
     let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
 
     it "should be saved as all lower-case" do
@@ -27,7 +48,7 @@ describe User do
     end
   end
   
-  describe "when email format is invalid" do
+  context "when email format is invalid" do
     it "should be invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.
                      foo@bar_baz.com foo@bar+baz.com]
@@ -38,7 +59,7 @@ describe User do
     end
   end
 
-  describe "when email format is valid" do
+  context "when email format is valid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
@@ -48,7 +69,7 @@ describe User do
     end
   end
   
-  describe "when email address is already taken" do
+  context "when email address is already taken" do
     before do
       user_with_same_email = @user.dup
       user_with_same_email.email = @user.email.upcase
@@ -58,34 +79,39 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when password is not present" do
+  context "when password is not present" do
     before { @user.password = @user.password_confirmation = " " }
     it { should_not be_valid }
   end
   
-  describe "when password doesn't match confirmation" do
+  context "when password doesn't match confirmation" do
     before { @user.password_confirmation = "mismatch" }
     it { should_not be_valid }
   end
 
-  describe "with a password that's too short" do
+  context "with a password that's too short" do
     before { @user.password = @user.password_confirmation = "a" * 5 }
     it { should be_invalid }
   end
 
-  describe "return value of authenticate method" do
+  context "return value of authenticate method" do
     before { @user.save }
     let(:found_user) { User.find_by(email: @user.email) }
 
-    describe "with valid password" do
+    context "with valid password" do
       it { should eq found_user.authenticate(@user.password) }
     end
 
-    describe "with invalid password" do
+    context "with invalid password" do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
       it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_false }
     end
+  end
+  
+  before { @user.save }
+  it "remember token" do
+    subject.remember_token.should_not be_blank
   end
 end

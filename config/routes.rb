@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   match '/individuals',   to: 'main_pages#individuals', via: 'get'
   match '/companies',     to: 'main_pages#companies',   via: 'get'
   match '/banks',         to: 'main_pages#banks',       via: 'get'
-  match '/signup',        to: 'users#new',              via: 'get'
   match '/banks/signup',  to: 'banks#new',              via: 'get'
+  match '/signup',        to: 'users#new',              via: 'get'
+  match '/login',         to: 'sessions#new',           via: 'get'
+  match '/logout',        to: 'sessions#destroy',       via: 'delete'
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
