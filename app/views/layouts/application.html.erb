@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <%= csrf_meta_tags %>
-    <%= render 'layouts/shim' %>
-  </head>
-  <body>
-    <%= render 'layouts/base_header' %>
-    <div class="container">
-      <%= yield %>
-	  <%= debug(params) if Rails.env.development? %>
-    </div>
-  </body>
+	<head>
+		<title><%= full_title(yield(:title)) %></title>
+		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= csrf_meta_tags %>
+		<%= render 'layouts/shim' %>
+	</head>
+	<body>
+		<%= render 'layouts/base_header' %>
+		<div class="container">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-<%= key %> alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<% if value.is_a? Hash %>
+						<% if value[:title] %>
+							<strong><%= value[:title] %></strong><br>
+						<% end %>
+						<%= value[:message] %>
+					<% else %>
+						<%= value %>
+					<% end %>
+				</div>
+			<% end %>
+			<%= yield %>
+			<%= debug(params) if Rails.env.development? %>
+		</div>
+	</body>
 </html>

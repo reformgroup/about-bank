@@ -53,6 +53,14 @@ RSpec.describe "user pages", :type => :features do
 
         it { should have_title(full_title("#{user.first_name} #{user.last_name}")) }
       end
+      
+      context "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: 'ivan.ivanov@example.com') }
+
+        it { should have_link('Выйти') }
+        it { should have_title(full_title("#{user.first_name} #{user.last_name}")) }
+      end
     end
   end
 end

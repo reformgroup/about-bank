@@ -12,33 +12,33 @@ RSpec.describe "authentication pages", type: :features do
   
   context "login" do
     
-    let(:submit) { "Выйти" }
-    
     before { visit login_path }
+    
+    let(:submit) { "Войти" }
 
     context "with invalid information" do
       before { click_button submit }
 
       it { should have_title(full_title('Вход')) }
-      it { should have_css('.text-danger') }
+      it { should have_selector('div.alert.alert-danger') }
       
       describe "after visiting another page" do
         before { click_link "Частным клиентам" }
-        it { should_not have_selector('div.alert.alert-error') }
+        it { should_not have_selector('div.alert.alert-danger') }
       end
     end
     
     context "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before do
-        fill_in "user_email",    with: user.email.upcase
-        fill_in "user_password", with: user.password
+        fill_in "session_email",    with: user.email.upcase
+        fill_in "session_password", with: user.password
         click_button submit
       end
 
-      it { should have_title(user.name) }
-      it { should have_link('Профиль',  href: user_path(user)) }
-      it { should have_link('Выйти',    href: lognout_path) }
+      it { should have_title("#{user.first_name} #{user.last_name}") }
+      it { should have_link('Профиль',  href: user_path(user, locale: I18n.locale)) }
+      it { should have_link('Выйти',    href: logout_path(locale: I18n.locale)) }
     end
   end
 end

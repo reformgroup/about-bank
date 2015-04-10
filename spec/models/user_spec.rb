@@ -1,8 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  first_name      :string
+#  last_name       :string
+#  email           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#  remember_digest :string
+#
+
 require 'spec_helper'
 
 RSpec.describe User, :type => :model do
 
-  before { @user = User.new(first_name: "Ivan", last_name: "Ivanov", email: "user@example.com",
+  before { @user = User.new(first_name: "Ivan", last_name: "Ivanov", email: "ivan.ivanov@example.com",
                      password: "foobar", password_confirmation: "foobar") }
 
   subject { @user }
@@ -13,7 +27,7 @@ RSpec.describe User, :type => :model do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
-  it { should respond_to(:remember_token) }
+  it { should respond_to(:remember_digest) }
   it { should respond_to(:authenticate) }
   
   it { should be_valid }
@@ -99,19 +113,19 @@ RSpec.describe User, :type => :model do
     let(:found_user) { User.find_by(email: @user.email) }
 
     context "with valid password" do
-      it { should eq found_user.authenticate(@user.password) }
+      it { should == found_user.authenticate(@user.password) }
     end
 
     context "with invalid password" do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
-      it { should_not eq user_for_invalid_password }
-      specify { expect(user_for_invalid_password).to be_false }
+      it { should_not == user_for_invalid_password }
+      specify { expect(user_for_invalid_password).to be false }
     end
   end
   
   before { @user.save }
-  it "remember token" do
-    subject.remember_token.should_not be_blank
+  it "remember digest" do
+    subject.remember_digest.should_not be_blank
   end
 end

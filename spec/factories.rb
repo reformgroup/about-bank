@@ -1,4 +1,8 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :bank_user do
+    bank nil
+user nil
+  end
+
   factory :user do
     first_name "Ivan"
     last_name "Ivanov"

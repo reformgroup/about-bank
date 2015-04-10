@@ -1,0 +1,36 @@
+ru:
+  helpers:
+    label:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        email: "Адрес электронной почты"
+        password: "Пароль"
+        password_confirmation: "Ещё раз пароль"
+      bank:
+        name: "Название банка"
+    submit:
+      user:
+        create: "Зарегистрироваться"
+      session:
+        submit: "Войти"
+  main_pages:
+    individuals: "Частным клиентам"
+    companies: "Для бизнеса"
+    banks: "Банкам"
+    signup: "Регистрация"
+    login: "Войти"
+  signup:
+    title: "Регистрация"
+    success: "Поздравляем! Вы зарегистрировались."
+  login:
+    title: "Вход"
+    forgot_password_link: "Забыли пароль?"
+    with_invalid_information:
+      title: "Ой, где-то ошибка!"
+      message: "Учётной записи с таким адресом электронной почты и паролем не существует."
+  session:
+    profile: "Профиль"
+    logout: "Выйти"
+  logged_in_user:
+    danger: "Для начала нужно зайти в свою учётную запись или зарегистрироваться."
