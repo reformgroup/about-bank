@@ -7,17 +7,16 @@ class BanksController < ApplicationController
   end
   
   def create
-    #logger.debug "1 #{bank_params}"
-    #logger.debug "2 #{bank_params[:bank_users_attributes]}"
-    #logger.debug "3 #{bank_params[:bank_users_attributes][0][:user_attributes]}"
-    
-    @bank       = Bank.new(bank_params)
-    @bank_users = @bank.bank_users
-    @user       = @bank.users
+    @bank = Bank.new(bank_params)
     if @bank.save
-      # log_in @user
-      # flash[:success] = I18n.t("signup.success")
-      # redirect_to @user
+      @users = @bank.users
+      logger.debug "1 #{@bank.users.first}"
+      logger.debug "2 #{@bank.users}"
+      logger.debug "3 #{@bank.users.count}"
+      logger.debug "4 #{@bank.users.select(:email)}"
+      #log_in @user
+      #flash[:success] = I18n.t("signup.success")
+      #redirect_to @user
     else
       render 'signup'
     end

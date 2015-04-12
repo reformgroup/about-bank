@@ -12,27 +12,27 @@
 						<%= error_messages @bank, :name %>
 					</div>
 					
-					<%= f.fields_for(@bank_users) do |bank_users_f| %>
-						<%= bank_users_f.fields_for(@user) do |user_f| %>
+					<%= f.fields_for(:bank_users) do |bank_users_f| %>
+						<%= bank_users_f.fields_for(:user) do |user_f| %>
 							<div class="form-group">
 								<%= user_f.text_field :first_name, class: "form-control", placeholder: I18n.t("helpers.label.user.first_name") %>
-								<%= error_messages @user, :first_name %>
+								<%= error_messages user_f.object, :first_name %>
 							</div>
 							<div class="form-group">
 								<%= user_f.text_field :last_name, class: "form-control", placeholder: I18n.t("helpers.label.user.last_name") %>
-								<%= error_messages @user, :last_name %>
+								<%= error_messages user_f.object, :last_name %>
 							</div>
 							<div class="form-group">
 								<%= user_f.text_field :email, class: "form-control", placeholder: I18n.t("helpers.label.user.email") %>
-								<%= error_messages @user, :email %>
+								<%= error_messages user_f.object, :email %>
 							</div>
 							<div class="form-group">
 								<%= user_f.password_field :password, class: "form-control", placeholder: I18n.t("helpers.label.user.password") %>
-								<%= error_messages @user, :password %>
+								<%= error_messages user_f.object, :password %>
 							</div>
 							<div class="form-group">
 								<%= user_f.password_field :password_confirmation, class: "form-control", placeholder: I18n.t("helpers.label.user.password_confirmation") %>
-								<%= error_messages @user, :password_confirmation %>
+								<%= error_messages user_f.object, :password_confirmation %>
 							</div>
 						<% end %>
 					<% end %>
