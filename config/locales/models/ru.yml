@@ -15,6 +15,7 @@ ru:
         birth_date: "Дата рождения"
         password: "Пароль"
         password_confirmation: "Ещё раз пароль"
+        remember_me: "Запомнить меня"
       user/gender:
         male: "Мужской"
         female: "Женский"

@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = I18n.t("signup.success")
+      flash[:success] = t ".flash.success.message"
       redirect_to @user
     else
       render 'signup'
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def logged_in_user
     unless logged_in?
       store_location
-      flash[:danger] = I18n.t("logged_in_user.danger")
+      flash[:danger] = t ".flash.danger.message"
       redirect_to login_url
     end
   end

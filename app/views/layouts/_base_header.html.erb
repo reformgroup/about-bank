@@ -11,9 +11,9 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<%= nav_link(I18n.t("base_header.navbar.individuals"), individuals_path) %>
-				<%= nav_link(I18n.t("base_header.navbar.companies"), companies_path) %>
-				<%= nav_link(I18n.t("base_header.navbar.banks"), banks_path) %>
+				<%= nav_link t(".individuals"), individuals_path %>
+				<%= nav_link t(".companies"), companies_path %>
+				<%= nav_link t(".banks"), banks_path %>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -29,16 +29,16 @@
 					<li id="fat-menu" class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "#{current_user.first_name} #{current_user.last_name}" %> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><%= link_to I18n.t("session.profile"), current_user %></li>
+							<li><%= link_to t(".dashboard"), current_user %></li>
 							<li class="divider"></li>
 							<li>
-								<%= link_to I18n.t("session.logout"), logout_path, method: "delete" %>
+								<%= link_to t(".logout"), logout_path, method: "delete" %>
 							</li>
 						</ul>
 					</li>
 				<% else %>
-			        <li><%= link_to I18n.t("main_pages.signup"), signup_path %></li>
-					<li><%= link_to I18n.t("main_pages.login"), login_path %></li>
+			        <li><%= link_to t(".signup"), signup_path %></li>
+					<li><%= link_to t(".login"), login_path %></li>
 				<% end %>
 			</ul>
 		</div><!--/.nav-collapse -->

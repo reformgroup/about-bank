@@ -10,9 +10,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_back_or user
     else
-      flash.now[:danger] = {}
-      flash.now[:danger][:title] = I18n.t("login.with_invalid_information.title")
-      flash.now[:danger][:message] = I18n.t("login.with_invalid_information.message")
+      flash.now[:danger] = { title: t(".flash.danger.title"), message: t(".flash.danger.message") }
       render 'new'
     end
   end

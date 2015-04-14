@@ -11,7 +11,7 @@ class BanksController < ApplicationController
     if @bank.save
       @user = @bank.users(true).first
       log_in @user
-      flash[:success] = I18n.t("signup.success")
+      flash[:success] = t ".flash.success.message"
       redirect_to @user
     else
       render 'signup'
