@@ -1,5 +1,20 @@
-<% provide(:title, "#{@user.first_name} #{@user.last_name}") %>
+<% provide(:title, short_user_name(@user)) %>
 
-<div class="row">
-	<%= "#{@user.first_name} #{@user.last_name}" %>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-<%= default_grid_system %>-12">
+				<h2><%= user_name @user %></h2>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-<%= default_grid_system %>-4">
+				<p class="text-muted lead">Адрес электронной почты</p>
+			</div>
+			<div class="col-<%= default_grid_system %>-8">
+				<p class="lead"><%= @user.email %></p>
+			</div>
+		</div>
+	</div>
 </div>

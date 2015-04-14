@@ -10,6 +10,16 @@ module ApplicationHelper
     LOCALE_LIST
   end
   
+  # Returns the full title on a per-page basis.
+  def full_title(page_title)
+    base_title = "About bank"
+    if page_title.empty?
+      base_title
+    else
+      "#{base_title} | #{page_title}"
+    end
+  end
+  
   def default_grid_system
     "sm"
   end
@@ -30,6 +40,25 @@ module ApplicationHelper
         error_arr.each { |msg| error_content << content_tag(:li, msg, class: "text-danger") }
       end
       error_content.html_safe
+    end
+  end
+  
+  def nav_link(link_text, link_path)
+    classes[:class] = 'active' if current_page?(link_path)
+
+    content_tag(:li, classes) do
+      link_to link_text, link_path
+    end
+  end
+  
+  def nav_link(link_text, link_path)
+    classes = {}
+    if current_page?(link_path)
+      classes[:class] = 'active'
+      link_path = "#"
+    end
+    content_tag(:li, classes) do
+      link_to link_text, link_path
     end
   end
 end

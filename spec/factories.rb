@@ -7,6 +7,8 @@ user nil
     first_name "Ivan"
     last_name "Ivanov"
     email "ivan.ivanov@example.com"
+    birth_date "1900/01/01"
+    gender "male"
     password "foobar"
     password_confirmation "foobar"
   end

@@ -9,14 +9,10 @@ class BanksController < ApplicationController
   def create
     @bank = Bank.new(bank_params)
     if @bank.save
-      @users = @bank.users
-      logger.debug "1 #{@bank.users.first}"
-      logger.debug "2 #{@bank.users}"
-      logger.debug "3 #{@bank.users.count}"
-      logger.debug "4 #{@bank.users.select(:email)}"
-      #log_in @user
-      #flash[:success] = I18n.t("signup.success")
-      #redirect_to @user
+      @user = @bank.users(true).first
+      log_in @user
+      flash[:success] = I18n.t("signup.success")
+      redirect_to @user
     else
       render 'signup'
     end
@@ -25,7 +21,12 @@ class BanksController < ApplicationController
   private
 
   def bank_params
-    params.require(:bank).permit(:name, bank_users_attributes: [{ user_attributes: [:first_name, :last_name, :email, 
-                                                          :password, :password_confirmation] }])
+    params.require(:bank).permit(:name, bank_users_attributes: [{ user_attributes: [:first_name, 
+                                                                                    :last_name, 
+                                                                                    :birth_date, 
+                                                                                    :gender, 
+                                                                                    :email, 
+                                                                                    :password, 
+                                                                                    :password_confirmation] }])
   end
 end

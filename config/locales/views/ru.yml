@@ -14,12 +14,13 @@ ru:
         create: "Зарегистрироваться"
       session:
         submit: "Войти"
-  main_pages:
-    individuals: "Частным клиентам"
-    companies: "Для бизнеса"
-    banks: "Банкам"
-    signup: "Регистрация"
-    login: "Войти"
+  base_header:
+    navbar:
+      individuals: "Частным клиентам"
+      companies: "Для бизнеса"
+      banks: "Банкам"
+      signup: "Регистрация"
+      login: "Войти"
   signup:
     title: "Регистрация"
     success: "Поздравляем! Вы зарегистрировались."

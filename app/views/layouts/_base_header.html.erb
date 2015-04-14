@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -11,9 +11,9 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<%= header_main_links :individuals %>
-				<%= header_main_links :companies %>
-				<%= header_main_links :banks %>
+				<%= nav_link(I18n.t("base_header.navbar.individuals"), individuals_path) %>
+				<%= nav_link(I18n.t("base_header.navbar.companies"), companies_path) %>
+				<%= nav_link(I18n.t("base_header.navbar.banks"), banks_path) %>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">

@@ -10,6 +10,8 @@
 #  updated_at      :datetime         not null
 #  password_digest :string
 #  remember_digest :string
+#  gender          :string
+#  birth_date      :date
 #
 
 class User < ActiveRecord::Base
@@ -29,6 +31,8 @@ class User < ActiveRecord::Base
   
   validates :first_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
   validates :last_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
+  validates :gender, presence: true, length: { maximum: 6 }
+  validates_date :birth_date, presence: true, before: lambda { User.not_younger }, after: lambda { User.not_older }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
@@ -45,6 +49,16 @@ class User < ActiveRecord::Base
     # Returns a random token.
     def new_token
       SecureRandom.urlsafe_base64
+    end
+    
+    # Users can not be older than this date
+    def not_older
+      78.years.ago
+    end
+    
+    # Users can not be younger than this date
+    def not_younger
+      18.years.ago
     end
   end
 

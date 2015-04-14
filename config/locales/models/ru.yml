@@ -1,0 +1,22 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one: Пользователь
+        other: Пользователи
+      bank:
+        one: Банк
+        other: Банки
+    attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        email: "Адрес электронной почты"
+        birth_date: "Дата рождения"
+        password: "Пароль"
+        password_confirmation: "Ещё раз пароль"
+      user/gender:
+        male: "Мужской"
+        female: "Женский"
+      bank:
+        name: "Название банка"

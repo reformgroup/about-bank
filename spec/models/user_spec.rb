@@ -10,6 +10,8 @@
 #  updated_at      :datetime         not null
 #  password_digest :string
 #  remember_digest :string
+#  gender          :string
+#  birth_date      :date
 #
 
 require 'spec_helper'

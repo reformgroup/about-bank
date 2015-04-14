@@ -34,6 +34,22 @@
 								<%= user_f.password_field :password_confirmation, class: "form-control", placeholder: I18n.t("helpers.label.user.password_confirmation") %>
 								<%= error_messages user_f.object, :password_confirmation %>
 							</div>
+							<div class="form-group">
+								<%= user_f.label :birth_date %><br>
+								<%= user_f.date_select :birth_date, { start_year: User.not_older.year, end_year: User.not_younger.year, prompt: true}, class: "form-control date-select" %>
+								<%= error_messages user_f.object, :birth_date %>
+							</div>
+							<label class="radio-inline">
+							  <%= user_f.radio_button :gender, :male %>
+							  <%= User.human_attribute_name("gender.male") %>
+							</label>
+							<label class="radio-inline">
+							  <%= user_f.radio_button :gender, :male %>
+							  <%= User.human_attribute_name("gender.female") %>
+							</label>
+							<br>
+							<%= error_messages user_f.object, :gender %>
+							<br>
 						<% end %>
 					<% end %>
 					<%= f.submit nil, class: "btn btn-large btn-primary" %>
