@@ -23,12 +23,15 @@ ru:
   users:
     signup:
       title: "Регистрация"
+      submit: "Зарегистрироваться"
     show:
       edit_button: "Редактировать"
   banks:
     signup:
       title: "Регистрация"
+      submit: "Зарегистрировать"
   sessions:
     new:
       title: "Вход"
       forgot_password: "Забыли пароль?"
+      submit: "Войти"

@@ -1,7 +1,4 @@
-FactoryGirl.define do  factory :bank_user do
-    bank nil
-user nil
-  end
+FactoryGirl.define do
 
   factory :user do
     first_name "Ivan"

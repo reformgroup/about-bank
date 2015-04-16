@@ -19,7 +19,7 @@
 							<span><%= User.human_attribute_name(:remember_me) %></span>
 						<% end %>
 					</div>
-					<%= f.submit nil, class: "btn btn-large btn-primary" %>
+					<%= f.submit t(".submit"), class: "btn btn-primary" %>
 					<%= link_to t(".forgot_password"), "#" %>
 			    <% end %>
 			</div>

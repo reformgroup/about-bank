@@ -4,7 +4,7 @@
 	<div class="col-<%= default_grid_system %>-4 pull-right">
 		<div class="panel panel-default">
 		  <div class="panel-body">
-			  <h3><%= t(".title") %></h3>
+			  <h3><%= t ".title" %></h3>
 			  	<hr>
 				<%= form_for(@user, html: { class: "form" }) do |f| %>
 					<div class="form-group">
@@ -47,7 +47,7 @@
 					<br>
 					<%= error_messages @user, :gender %>
 					<br>
-					<%= f.submit nil, class: "btn btn-large btn-primary" %>
+					<%= f.submit t(".submit"), class: "btn btn-primary" %>
 			    <% end %>
 			</div>
 		</div>

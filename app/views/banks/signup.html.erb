@@ -41,18 +41,18 @@
 							</div>
 							<label class="radio-inline">
 							  <%= user_f.radio_button :gender, :male %>
-							  <%= User.human_attribute_name("gender.male") %>
+							  <%= User.human_attribute_name "gender.male" %>
 							</label>
 							<label class="radio-inline">
 							  <%= user_f.radio_button :gender, :male %>
-							  <%= User.human_attribute_name("gender.female") %>
+							  <%= User.human_attribute_name "gender.female" %>
 							</label>
 							<br>
 							<%= error_messages user_f.object, :gender %>
 							<br>
 						<% end %>
 					<% end %>
-					<%= f.submit nil, class: "btn btn-large btn-primary" %>
+					<%= f.submit t(".submit"), class: "btn btn-primary" %>
 			    <% end %>
 			</div>
 		</div>

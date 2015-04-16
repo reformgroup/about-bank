@@ -17,9 +17,8 @@
 require 'spec_helper'
 
 RSpec.describe User, :type => :model do
-
-  before { @user = User.new(first_name: "Ivan", last_name: "Ivanov", email: "ivan.ivanov@example.com",
-                     password: "foobar", password_confirmation: "foobar") }
+  
+  before { @user = FactoryGirl.build(:user) }
 
   subject { @user }
   
@@ -31,6 +30,8 @@ RSpec.describe User, :type => :model do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_digest) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:gender) }
+  it { should respond_to(:birth_date) }
   
   it { should be_valid }
 
