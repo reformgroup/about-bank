@@ -16,8 +16,10 @@ ru:
         password: "Пароль"
         password_confirmation: "Ещё раз пароль"
         remember_me: "Запомнить меня"
+        gender: "Пол"
       user/gender:
         male: "Мужской"
         female: "Женский"
+        other: "Другое"
       bank:
         name: "Название банка"

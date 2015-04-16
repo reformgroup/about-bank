@@ -13,13 +13,21 @@ ru:
       profile: "Профиль"
       bank: "Банк"
       users: "Пользователи"
+  main_pages:
+    individuals:
+      title: "Частным клиентам"
+    companies:
+      title: "Для бизнеса"
+    banks:
+      title: "Банкам"
   users:
-    login:
-      title: "Вход"
-      forgot_password: "Забыли пароль?"
-      with_invalid_information:
-        title: "Ой, где-то ошибка!"
-        message: "Учётной записи с таким адресом электронной почты и паролем не существует."
+    signup:
+      title: "Регистрация"
+    show:
+      edit_button: "Редактировать"
+  banks:
+    signup:
+      title: "Регистрация"
   sessions:
     new:
       title: "Вход"

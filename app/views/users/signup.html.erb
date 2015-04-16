@@ -29,16 +29,20 @@
 					</div>
 					<div class="form-group">
 						<%= f.label :birth_date %><br>
-						<%= f.date_select :birth_date, { start_year: User.not_older.year, end_year: User.not_younger.year, prompt: true}, class: "form-control date-select" %>
+						<%= f.date_select :birth_date, { start_year: User.not_younger.year, end_year: User.not_older.year, prompt: true }, class: "form-control date-select selectpicker" %>
 						<%= error_messages @user, :birth_date %>
 					</div>
 					<label class="radio-inline">
-					  <%= f.radio_button :gender, :male %>
-					  <%= User.human_attribute_name("gender.male") %>
+						<%= f.radio_button :gender, :male %>
+						<%= User.human_attribute_name("gender.male") %>
 					</label>
 					<label class="radio-inline">
-					  <%= f.radio_button :gender, :male %>
-					  <%= User.human_attribute_name("gender.female") %>
+						<%= f.radio_button :gender, :female %>
+						<%= User.human_attribute_name("gender.female") %>
+					</label>
+					<label class="radio-inline">
+						<%= f.radio_button :gender, :other %>
+						<%= User.human_attribute_name("gender.other") %>
 					</label>
 					<br>
 					<%= error_messages @user, :gender %>

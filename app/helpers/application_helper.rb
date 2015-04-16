@@ -21,9 +21,25 @@ module ApplicationHelper
   end
   
   def default_grid_system
-    "sm"
+    "md"
+  end
+
+  def default_col_class
+    "col-#{default_grid_system}-12"
   end
   
+  def default_left_col_class
+    "col-#{default_grid_system}-3"
+  end
+
+  def default_right_col_class
+    "col-#{default_grid_system}-9"
+  end
+  
+  def default_right_col_offset_class
+    "col-#{default_grid_system}-offset-3"
+  end
+
   def error_messages(object, method = nil)
     if method
       each_error object.errors[method]

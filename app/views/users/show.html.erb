@@ -9,11 +9,33 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-<%= default_grid_system %>-4">
-				<p class="text-muted lead">Адрес электронной почты</p>
+			<div class="<%= default_left_col_class %>">
+				<p class="text-muted"><%= User.human_attribute_name "email" %></p>
 			</div>
-			<div class="col-<%= default_grid_system %>-8">
-				<p class="lead"><%= @user.email %></p>
+			<div class="<%= default_right_col_class %>">
+				<p class=""><%= @user.email %></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="<%= default_left_col_class %>">
+				<p class="text-muted"><%= User.human_attribute_name "birth_date" %></p>
+			</div>
+			<div class="<%= default_right_col_class %>">
+				<p class=""><%= l @user.birth_date, format: :long %></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="<%= default_left_col_class %>">
+				<p class="text-muted"><%= User.human_attribute_name "gender" %></p>
+			</div>
+			<div class="<%= default_right_col_class %>">
+				<p class=""><%= User.human_attribute_name "gender.#{@user.gender}" %></p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="<%= default_col_class %>">
+				<%= link_to t(".edit_button"), edit_user_path, { class: "btn btn-default", role: "button" } %>
 			</div>
 		</div>
 	</div>

@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:index, :edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update]
+  before_action :correct_user,   only: [:show, :edit, :update]
   
-  layout "dashboard", only: [:index, :show]
+  layout "dashboard", only: [:index, :show, :edit, :update]
   
   def signup
     @user = User.new
@@ -31,11 +31,25 @@ class UsersController < ApplicationController
       render 'signup'
     end
   end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(main_user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :gender, :birth_date)
+  end
+  
+  def main_user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :gender, :birth_date)
   end
 
   # Before filters
@@ -44,7 +58,7 @@ class UsersController < ApplicationController
   def logged_in_user
     unless logged_in?
       store_location
-      flash[:danger] = t ".flash.danger.message"
+      flash[:danger] = t "users_controller.logged_in_user.flash.danger.message"
       redirect_to login_url
     end
   end

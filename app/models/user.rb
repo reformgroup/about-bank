@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   validates :gender, presence: true, length: { maximum: 6 }
   validates_date :birth_date, presence: true, before: lambda { User.not_younger }, after: lambda { User.not_older }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, :if => :password
+  validates :password_confirmation, presence: true, :if => :password_confirmation
   
   class << self
     
