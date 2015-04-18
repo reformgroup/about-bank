@@ -26,5 +26,6 @@ group :test do
   gem 'capybara',           '~> 2.4.4'
   gem 'minitest'
   gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'faker',              '~> 1.4.3'
 end
 

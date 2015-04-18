@@ -20,6 +20,7 @@ ru:
       title: "Для бизнеса"
     banks:
       title: "Банкам"
+      signup_button: "Зарегистрировать"
   users:
     signup:
       title: "Регистрация"

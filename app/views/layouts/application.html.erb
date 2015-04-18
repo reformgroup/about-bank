@@ -11,8 +11,17 @@
 		<%= render 'layouts/base_header' %>
 		<div class="container">
 			<div class="row">
-				<%= render 'layouts/flash' %>
-				<%= yield %>
+        <div class="col-<%= default_grid_system %>-12">
+				  <%= render 'layouts/flash' %>
+        </div>
+				<% if logged_in? %>
+					<%= render 'layouts/sidebar' %>
+					<div class="col-<%= default_grid_system %>-9">
+				<% else %>
+					<div class="col-<%= default_grid_system %>-12">
+				<% end %>
+					<%= yield %>
+				</div>
 			</div>
 			<%= render 'layouts/debug' %>
 		</div>

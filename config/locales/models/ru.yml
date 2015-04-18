@@ -23,3 +23,5 @@ ru:
         other: "Другое"
       bank:
         name: "Название банка"
+        short_name: "Короткое название"
+        website: "Сайт"

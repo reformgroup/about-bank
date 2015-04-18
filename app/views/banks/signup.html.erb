@@ -11,6 +11,13 @@
 						<%= f.text_field :name, class: "form-control", placeholder: true %>
 						<%= error_messages @bank, :name %>
 					</div>
+					<div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">www.</span>
+              <%= f.text_field :website, class: "form-control", placeholder: true %>
+            </div>
+						<%= error_messages @bank, :website %>
+					</div>
 					
 					<%= f.fields_for(:bank_users) do |bank_users_f| %>
 						<%= bank_users_f.fields_for(:user) do |user_f| %>

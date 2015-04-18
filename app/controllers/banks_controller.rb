@@ -21,12 +21,7 @@ class BanksController < ApplicationController
   private
 
   def bank_params
-    params.require(:bank).permit(:name, bank_users_attributes: [{ user_attributes: [:first_name, 
-                                                                                    :last_name, 
-                                                                                    :birth_date, 
-                                                                                    :gender, 
-                                                                                    :email, 
-                                                                                    :password, 
-                                                                                    :password_confirmation] }])
+    params.require(:bank).permit(:name, :website, :short_anme, bank_users_attributes: [{ user_attributes: [:first_name, 
+                                  :last_name, :birth_date, :gender, :email, :password, :password_confirmation] }])
   end
 end

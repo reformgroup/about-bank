@@ -18,7 +18,7 @@ require 'spec_helper'
 
 RSpec.describe User, :type => :model do
   
-  before { @user = FactoryGirl.build(:user) }
+  before { @user = build(:user) }
 
   subject { @user }
   
@@ -28,7 +28,6 @@ RSpec.describe User, :type => :model do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
-  it { should respond_to(:remember_digest) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:gender) }
   it { should respond_to(:birth_date) }
@@ -38,8 +37,8 @@ RSpec.describe User, :type => :model do
   context "when first name format is invalid" do
     it "should be invalid" do
       name = %w[foo123 ,foo foo,bar]
-      name.each do |invalid_name|
-        @user.first_name = invalid_name
+      name.each do |i|
+        @user.first_name = i
         expect(@user).not_to be_valid
       end
     end
@@ -48,13 +47,48 @@ RSpec.describe User, :type => :model do
   context "when first name format is valid" do
     it "should be valid" do
       name = %w[Foo fOO foo Foo-Bar]
-      name.each do |valid_name|
-        @user.first_name = valid_name
+      name.each do |i|
+        @user.first_name = i
         expect(@user).to be_valid
       end
     end
   end
+
+  context "when last name format is invalid" do
+    it "should be invalid" do
+      name = %w[foo123 ,foo foo,bar]
+      name.each do |i|
+        @user.last_name = i
+        expect(@user).not_to be_valid
+      end
+    end
+  end
   
+  context "when last name format is valid" do
+    it "should be valid" do
+      name = %w[Foo fOO foo Foo-Bar]
+      name.each do |i|
+        @user.last_name = i
+        expect(@user).to be_valid
+      end
+    end
+  end
+
+  context "when birth date format is invalid" do
+    it "should be valid" do
+      dates = %w[deew-12-12 0000-00-00 FooBar]
+      dates.each do |i|
+        @user.email = i
+        expect(@user).not_to be_valid
+      end
+    end
+  end
+
+  context "when birth date format is valid" do
+    before { @user.email = 18.years.ago }
+    it { should_not be_valid }
+  end
+
   context "email address with mixed case" do
     let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
 
@@ -125,10 +159,5 @@ RSpec.describe User, :type => :model do
       it { should_not == user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be false }
     end
-  end
-  
-  before { @user.save }
-  it "remember digest" do
-    subject.remember_digest.should_not be_blank
   end
 end

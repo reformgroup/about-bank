@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
   validates :last_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
   validates :gender, presence: true, length: { maximum: 6 }
-  validates_date :birth_date, presence: true, before: lambda { User.not_younger }, after: lambda { User.not_older }
+  validates_date :birth_date, presence: true, on_or_before: lambda { User.not_younger }, on_or_after: lambda { User.not_older }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, :if => :password
   validates :password_confirmation, presence: true, :if => :password_confirmation
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
     
     # Users can not be older than this date
     def not_older
-      78.years.ago
+      108.years.ago
     end
     
     # Users can not be younger than this date

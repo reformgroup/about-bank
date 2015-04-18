@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   
   root  'main_pages#individuals'
   
-  match '/individuals',   to: 'main_pages#individuals', via: 'get'
   match '/companies',     to: 'main_pages#companies',   via: 'get'
   match '/banks',         to: 'main_pages#banks',       via: 'get'
   match '/banks/signup',  to: 'banks#signup',           via: 'get'

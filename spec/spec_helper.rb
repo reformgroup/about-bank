@@ -42,4 +42,9 @@ RSpec.configure do |config|
   
   config.include Capybara::DSL
   config.include Rails.application.routes.url_helpers
+  config.include ApplicationHelper
+  config.include UsersHelper
+  config.include SessionsHelper
+  config.include FactoryGirl::Syntax::Methods
+  config.include SessionsSpecHelper
 end

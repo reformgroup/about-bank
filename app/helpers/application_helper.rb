@@ -49,7 +49,6 @@ module ApplicationHelper
   end
   
   def each_error(error_arr)
-    
     if error_arr.any?
       error_content = String.new
       content_tag(:ui) do
@@ -59,20 +58,10 @@ module ApplicationHelper
     end
   end
   
-  def nav_link(link_text, link_path)
-    classes[:class] = 'active' if current_page?(link_path)
-
-    content_tag(:li, classes) do
-      link_to link_text, link_path
-    end
-  end
-  
-  def nav_link(link_text, link_path)
+  def nav_link_to(link_text, link_path)
     classes = {}
-    if current_page?(link_path)
-      classes[:class] = 'active'
-      link_path = "#"
-    end
+    classes[:class] = 'active' if request.path == link_path.split('?')[0]
+
     content_tag(:li, classes) do
       link_to link_text, link_path
     end

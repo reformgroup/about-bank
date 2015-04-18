@@ -1,4 +1,3 @@
 <% provide :title, t(".title") %>
 
-<h1>MainPages#banks</h1>
-<p>Find me in app/views/main_pages/banks.html.erb</p>
+<%= link_to t(".signup_button"), banks_signup_path, { class: "btn btn-default", role: "button" } %>

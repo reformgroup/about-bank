@@ -40,10 +40,6 @@
 						<%= f.radio_button :gender, :female %>
 						<%= User.human_attribute_name("gender.female") %>
 					</label>
-					<label class="radio-inline">
-						<%= f.radio_button :gender, :other %>
-						<%= User.human_attribute_name("gender.other") %>
-					</label>
 					<br>
 					<%= error_messages @user, :gender %>
 					<br>

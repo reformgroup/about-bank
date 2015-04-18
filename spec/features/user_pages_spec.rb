@@ -4,43 +4,44 @@ RSpec.describe "user pages", :type => :features do
 
   subject { page }
 
-  context "profile page" do
-    let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
-
-    it { should have_content("#{user.first_name} #{user.last_name}") }
-    it { should have_title(full_title("#{user.first_name} #{user.last_name}")) }
-  end
-
   context "signup page" do
-    before { visit signup_path }
     
     let(:submit) { "Зарегистрироваться" }
-
-    it { should have_content('Регистрация') }
-    it { should have_title(full_title('Регистрация')) }
+    let(:test_user) { build :user }
+    
+    before { visit signup_path }
+    
+    it { should have_content("Регистрация") }
+    it { should have_title(full_title("Регистрация")) }
     
     context "with invalid information" do
+      
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
 
       context "after submission" do
+        
         before { click_button submit }
 
-        it { should have_title('Регистрация') }
-        it { should have_css('div.field_with_errors') }
-        it { should have_css('li.text-danger') }
+        it { should have_title("Регистрация") }
+        it { should have_css("div.field_with_errors") }
+        it { should have_css("li.text-danger") }
       end
     end
     
     context "with valid information" do
+      
       before do
-        fill_in "user_first_name",            with: "Ivan"
-        fill_in "user_last_name",             with: "Ivanov"
-        fill_in "user_email",                 with: "ivan.ivanov@example.com"
-        fill_in "user_password",              with: "foobar"
-        fill_in "user_password_confirmation", with: "foobar"
+        fill_in "user[first_name]",                         with: test_user.first_name
+        fill_in "user[last_name]",                          with: test_user.last_name
+        fill_in "user[email]",                              with: test_user.email
+        fill_in "user[password]",                           with: test_user.password
+        fill_in "user[password_confirmation]",              with: test_user.password_confirmation
+        select I18n.l(test_user.birth_date, format: "%-d"), from: "user_birth_date_3i"
+        select I18n.l(test_user.birth_date, format: "%B"),  from: "user_birth_date_2i"
+        select I18n.l(test_user.birth_date, format: "%Y"),  from: "user_birth_date_1i"
+        choose "user_gender_male"
       end
 
       it "should create a user" do
@@ -48,19 +49,23 @@ RSpec.describe "user pages", :type => :features do
       end
       
       context "after saving the user" do
+        
+        let(:test_user_after_save) { User.find_by(email: test_user.email) }
+        
         before { click_button submit }
-        let(:user) { User.find_by(email: 'ivan.ivanov@example.com') }
 
-        it { should have_title(full_title("#{user.first_name} #{user.last_name}")) }
-      end
-      
-      context "after saving the user" do
-        before { click_button submit }
-        let(:user) { User.find_by(email: 'ivan.ivanov@example.com') }
-
-        it { should have_link('Выйти') }
-        it { should have_title(full_title("#{user.first_name} #{user.last_name}")) }
+        it { should have_title(full_title(short_user_name(test_user_after_save))) }
       end
     end
+  end
+  
+  context "profile page" do
+    
+    let(:test_user) { create_login_user }
+    
+    before { visit user_path(test_user) }
+    
+    it { should have_title(full_title(short_user_name(test_user))) }
+    it { should have_content(user_name(test_user)) }
   end
 end
