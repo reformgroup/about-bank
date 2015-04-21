@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe "user pages", :type => :features do
+RSpec.describe "signup pages", :type => :features do
 
   subject { page }
 
@@ -25,8 +25,8 @@ RSpec.describe "user pages", :type => :features do
         before { click_button submit }
 
         it { should have_title("Регистрация") }
-        it { should have_css("div.field_with_errors") }
-        it { should have_css("li.text-danger") }
+        it { should have_css(li_danger_css) }
+        it { should have_css(field_with_errors_css) }
       end
     end
     
@@ -54,7 +54,7 @@ RSpec.describe "user pages", :type => :features do
         
         before { click_button submit }
 
-        it { should have_title(full_title(short_user_name(test_user_after_save))) }
+        it { should have_title(full_title(test_user_after_save.short_user_name)) }
       end
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe "user pages", :type => :features do
     
     before { visit user_path(test_user) }
     
-    it { should have_title(full_title(short_user_name(test_user))) }
-    it { should have_content(user_name(test_user)) }
+    it { should have_title(full_title(test_user.short_user_name)) }
+    it { should have_content(test_user.full_user_name) }
   end
 end

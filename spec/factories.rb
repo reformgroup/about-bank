@@ -19,13 +19,11 @@ FactoryGirl.define do
     
     factory :bank_with_users do
       
-      transient do
-        users_count 1
-      end
+      transient { users_count 1 }
       
-      after(:create) do |bank, evaluator|
-        bank.users << create_list(:user, evaluator.users_count)
-        bank.save
+      after(:build) do |bank, evaluator|
+        bank.users << build_list(:user, evaluator.users_count)
+        bank
       end
     end
   end

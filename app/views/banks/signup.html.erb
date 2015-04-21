@@ -12,10 +12,7 @@
 						<%= error_messages @bank, :name %>
 					</div>
 					<div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">www.</span>
-              <%= f.text_field :website, class: "form-control", placeholder: true %>
-            </div>
+            <%= f.url_field :website, class: "form-control", placeholder: true %>
 						<%= error_messages @bank, :website %>
 					</div>
 					
@@ -51,7 +48,7 @@
 							  <%= User.human_attribute_name "gender.male" %>
 							</label>
 							<label class="radio-inline">
-							  <%= user_f.radio_button :gender, :male %>
+							  <%= user_f.radio_button :gender, :female %>
 							  <%= User.human_attribute_name "gender.female" %>
 							</label>
 							<br>

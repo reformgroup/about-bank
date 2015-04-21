@@ -1,7 +1,7 @@
-<% provide(:title, short_user_name(@user)) %>
+<% provide(:title, @user.short_user_name) %>
 
 <div class="panel panel-default">
-	<div class="panel-heading"><%= t(".title") %></div>
+	<div class="panel-heading"><%= t ".title" %></div>
 	<div class="panel-body">
 		<br>
 		<%= form_for(@user, html: { class: "form-horizontal" }) do |f| %>

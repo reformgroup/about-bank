@@ -47,4 +47,5 @@ RSpec.configure do |config|
   config.include SessionsHelper
   config.include FactoryGirl::Syntax::Methods
   config.include SessionsSpecHelper
+  config.include CssSpecHelper
 end

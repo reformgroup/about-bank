@@ -12,6 +12,7 @@ gem 'sdoc',           '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bcrypt-ruby',    '~> 3.1.5'
 gem 'validates_timeliness', '~> 3.0.14'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'byebug'

@@ -16,18 +16,13 @@
 
 class User < ActiveRecord::Base
   
-  attr_accessor :remember_token
-  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  VALID_NAME_REGEX = /\A[[:alpha:] -]*\z/i
-  
+  VALID_NAME_REGEX = /\A[[:alpha:]]+[[:alpha:] \-']*[[:alpha:]]+\z/i
+
+  attr_accessor :remember_token
+
   has_many :bank_users
   has_many :banks, through: :bank_users
-  
-  before_save { email.downcase! }
-  before_save :set_name
-  
-  has_secure_password
   
   validates :first_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
   validates :last_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
@@ -36,7 +31,12 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, :if => :password
   validates :password_confirmation, presence: true, :if => :password_confirmation
-  
+
+  before_save { email.downcase! }
+  before_save :set_name
+
+  has_secure_password
+
   class << self
     
     # Returns the hash digest of the given string.
@@ -78,7 +78,17 @@ class User < ActiveRecord::Base
   def forget
     update_attribute(:remember_digest, nil)
   end
-
+  
+  # Returns short user name like "Fred S."
+  def short_user_name
+    "#{first_name} #{last_name[0]}."
+  end
+  
+  # Returns full user name like "Fred Smitt"
+  def full_user_name
+    "#{first_name} #{last_name}"
+  end
+  
   private
   
   def set_name

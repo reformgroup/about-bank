@@ -46,7 +46,7 @@ RSpec.describe User, :type => :model do
   
   context "when first name format is valid" do
     it "should be valid" do
-      name = %w[Foo fOO foo Foo-Bar]
+      name = %w[Foo fOO foo Foo-Bar Николай]
       name.each do |i|
         @user.first_name = i
         expect(@user).to be_valid
@@ -66,7 +66,7 @@ RSpec.describe User, :type => :model do
   
   context "when last name format is valid" do
     it "should be valid" do
-      name = %w[Foo fOO foo Foo-Bar]
+      name = %w[Foo fOO foo Foo-Bar Александров]
       name.each do |i|
         @user.last_name = i
         expect(@user).to be_valid

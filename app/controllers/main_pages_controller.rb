@@ -1,4 +1,5 @@
 class MainPagesController < ApplicationController
+  
   def individuals
   end
   
