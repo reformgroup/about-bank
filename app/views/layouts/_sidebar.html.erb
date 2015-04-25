@@ -4,9 +4,9 @@
 		<div class="panel-body">
 			<div class="sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="#" class="active"><i class="fa fa-user fa-fw"></i>&nbsp;&nbsp;<%= t(".profile") %></a></li>
-					<li><a href="#"><i class="fa fa-university fa-fw"></i>&nbsp;&nbsp;<%= t(".bank") %></a></li>
-					<li><a href="#"><i class="fa fa-users fa-fw"></i>&nbsp;&nbsp;<%= t(".users") %></a></li>
+          <li><%= sidebar_item(t(".profile"), me_path(current_user), :user, available_for_roles: [:superadmin, :admin], active_controllers: [:users], active_actions: [:show_me]) %></li>
+					<li><%= sidebar_item(t(".banks"), banks_path, :university, available_for_roles: [:superadmin, :admin], active_controllers: [:banks]) %></li>
+          <li><%= sidebar_item(t(".users"), users_path, :users, available_for_roles: [:superadmin, :admin], active_controllers: [:users], active_actions: [:index]) %></li>
 				</ul>
 			</div>
 		</div>

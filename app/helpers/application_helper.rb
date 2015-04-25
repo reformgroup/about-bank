@@ -59,11 +59,39 @@ module ApplicationHelper
   end
   
   def nav_link_to(link_text, link_path)
-    classes = {}
-    classes[:class] = 'active' if request.path == link_path.split('?')[0]
+    options = {}
+    options[:class] = "active" if request.path == link_path.split("?")[0]
 
-    content_tag(:li, classes) do
-      link_to link_text, link_path
+    content_tag(:li, options) { link_to link_text, link_path }
+  end
+  
+  def dashboard_root_path
+    case current_user.role
+    when "superadmin", "admin", "bank_admin", "bank_user" then users_path
+    else user_path(current_user)
     end
+  end
+  
+  def sidebar_item(link_text, link_path, icon, options)
+    options[:available_for_roles] ||= []
+    options[:active_controllers]  ||= []
+    options[:active_paths]        ||= []
+    
+    if options[:available_for_roles].include? current_user.role.to_sym
+      if (options[:active_controllers].include?(controller_name.to_sym) || options[:active_paths].include?(request.path)) && (options[:active_actions].nil? ||  options[:active_actions].include?(action_name.to_sym))
+        options[:class] = "active"
+      end
+      link_to(link_path, options.slice(:class)) do
+        content_tag(:i, nil, class: "fa fa-#{icon} fa-fw").concat(link_text).html_safe
+      end
+    end
+  end
+  
+  def all_admin_roles
+    [:superadmin, :admin]
+  end
+  
+  def all_bank_roles
+    [:bank_admin, :bank_user]
   end
 end

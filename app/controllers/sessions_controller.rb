@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_back_or user
+      case user.role
+      when "superadmin", "admin" then redirect_to users_path
+      when "user", "admin" then redirect_to user
+      end
+      # redirect_back_or user
     else
       flash.now[:danger] = { title: t(".flash.danger.title"), message: t(".flash.danger.message") }
       render 'new'

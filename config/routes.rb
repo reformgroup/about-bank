@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
   
-  root  'main_pages#individuals'
+  root                          'main_pages#individual'
+  get     '/company',       to: 'main_pages#company'
+  get     '/bank',          to: 'main_pages#bank'
+  get     '/signup',        to: 'users#signup'
+  get     '/banks/signup',  to: 'banks#signup'
+  get     '/login',         to: 'sessions#new'
+  delete  '/logout',        to: 'sessions#destroy'
+  get     '/me/:id',        to: 'users#show_me', as: 'me'
+  get     '/me/:id/edit',   to: 'users#edit_me', as: 'edit_me'
   
-  match '/companies',     to: 'main_pages#companies',   via: 'get'
-  match '/banks',         to: 'main_pages#banks',       via: 'get'
-  match '/banks/signup',  to: 'banks#signup',           via: 'get'
-  match '/signup',        to: 'users#signup',           via: 'get'
-  match '/login',         to: 'sessions#new',           via: 'get'
-  match '/logout',        to: 'sessions#destroy',       via: 'delete'
   resources :users
+  
   resources :banks
   resources :sessions, only: [:new, :create, :destroy]
   

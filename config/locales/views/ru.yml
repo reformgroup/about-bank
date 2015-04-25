@@ -1,22 +1,23 @@
 ru:
   layouts:
     base_header:
-      individuals: "Частным клиентам"
-      companies: "Для бизнеса"
-      banks: "Банкам"
+      individual: "Частным клиентам"
+      company: "Для бизнеса"
+      bank: "Банкам"
       signup: "Регистрация"
       login: "Войти"
       logout: "Выйти"
+      profile: "Мой профиль"
       dashboard: "Панель управления"
     sidebar:
       title: "Панель управления"
       profile: "Профиль"
-      bank: "Банк"
+      banks: "Банки"
       users: "Пользователи"
   main_pages:
-    individuals:
+    individual:
       title: "Частным клиентам"
-    companies:
+    company:
       title: "Для бизнеса"
     banks:
       title: "Банкам"

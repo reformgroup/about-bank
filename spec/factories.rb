@@ -1,5 +1,5 @@
 FactoryGirl.define do
-
+  
   factory :user do
     
     first_name { Faker::Name.first_name }
@@ -9,6 +9,11 @@ FactoryGirl.define do
     gender "male"
     password "foobar"
     password_confirmation "foobar"
+    role "user"
+    
+    factory :superadmin do
+      role "superadmin"
+    end
   end
   
   factory :bank do

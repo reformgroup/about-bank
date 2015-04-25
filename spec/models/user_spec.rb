@@ -3,15 +3,17 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  email           :string
+#  last_name       :string           not null
+#  first_name      :string           not null
+#  middle_name     :string
+#  email           :string           not null
+#  gender          :integer          not null
+#  birth_date      :date             not null
+#  password_digest :string           not null
+#  remember_digest :string
+#  role            :integer          not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  password_digest :string
-#  remember_digest :string
-#  gender          :string
-#  birth_date      :date
 #
 
 require 'spec_helper'

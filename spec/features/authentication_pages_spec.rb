@@ -23,13 +23,13 @@ RSpec.describe "authentication pages", type: :features do
       before { click_button submit }
 
       it { should have_title(full_title('Вход')) }
-      it { should have_selector('div.alert.alert-danger') }
+      it { should have_selector(alert_danger_css) }
       
       describe "after visiting another page" do
         
         before { click_link "Частным клиентам" }
         
-        it { should_not have_selector('div.alert.alert-danger') }
+        it { should_not have_selector(alert_danger_css) }
       end
     end
     
@@ -43,7 +43,7 @@ RSpec.describe "authentication pages", type: :features do
         click_button submit
       end
 
-      it { should have_title(user.short_user_name) }
+      it { should have_title(user.short_name) }
       it { should have_link('Панель управления', href: user_path(user, locale: I18n.locale)) }
       it { should have_link('Выйти', href: logout_path(locale: I18n.locale)) }
     end

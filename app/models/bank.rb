@@ -3,11 +3,11 @@
 # Table name: banks
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :string           not null
+#  short_name :string
+#  website    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  website    :string
-#  short_name :string
 #
 
 class Bank < ActiveRecord::Base

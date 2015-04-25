@@ -3,15 +3,17 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  email           :string
+#  last_name       :string           not null
+#  first_name      :string           not null
+#  middle_name     :string
+#  email           :string           not null
+#  gender          :integer          not null
+#  birth_date      :date             not null
+#  password_digest :string           not null
+#  remember_digest :string
+#  role            :integer          not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  password_digest :string
-#  remember_digest :string
-#  gender          :string
-#  birth_date      :date
 #
 
 class User < ActiveRecord::Base
@@ -24,19 +26,24 @@ class User < ActiveRecord::Base
   has_many :bank_users
   has_many :banks, through: :bank_users
   
-  validates :first_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
   validates :last_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
+  validates :first_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
+  validates :middle_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }, :if => :middle_name
   validates :gender, presence: true, length: { maximum: 6 }
   validates_date :birth_date, presence: true, on_or_before: lambda { User.not_younger }, on_or_after: lambda { User.not_older }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, :if => :password
   validates :password_confirmation, presence: true, :if => :password_confirmation
+  validates :role, presence: true, :if => :role
 
   before_save { email.downcase! }
   before_save :set_name
-
+  after_initialize :set_default_role, :if => :new_record?
+  
   has_secure_password
-
+  enum gender: [:male, :female, :other]
+  enum role: [:superadmin, :admin, :bank_admin, :bank_user, :user]
+  
   class << self
     
     # Returns the hash digest of the given string.
@@ -80,16 +87,22 @@ class User < ActiveRecord::Base
   end
   
   # Returns short user name like "Fred S."
-  def short_user_name
+  def short_name
     "#{first_name} #{last_name[0]}."
   end
   
   # Returns full user name like "Fred Smitt"
-  def full_user_name
-    "#{first_name} #{last_name}"
+  def full_name(options = {})
+    name = "#{first_name}"
+    name << " #{middle_name}" if options[:middle_name] && middle_name
+    options[:last_name_first] ? "#{last_name} #{name}" : "#{name} #{last_name}"
   end
   
   private
+  
+  def set_default_role
+    self.role ||= :user
+  end
   
   def set_name
     self.first_name = normalize_name(self.first_name)

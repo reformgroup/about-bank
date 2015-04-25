@@ -1,9 +1,13 @@
 module SessionsSpecHelper
   
-  def create_login_user
-    user = create :user
+  def create_login_user(user_role = :user)
+    user = create user_role
     login user
     user
+  end
+  
+  def create_login_superadmin
+    create_login_user :superadmin
   end
   
   def login(user)

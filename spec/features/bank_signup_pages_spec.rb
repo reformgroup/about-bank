@@ -61,11 +61,13 @@ RSpec.describe "bank signup pages", :type => :features do
       
       context "after saving the bank" do
         
-        let(:bank_admin) { User.find_by(email: user.email) }
+        let(:saved_user) { User.find_by(email: user.email) }
         
         before { click_button submit }
-
-        it { should have_title(full_title(bank_admin.short_user_name)) }
+        
+        it { should have_css(alert_success_css) }
+        it { should have_title(full_title(saved_user.short_name)) }
+        it { should have_content(saved_user.full_name) }
       end
     end
   end
