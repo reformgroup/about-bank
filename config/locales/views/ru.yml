@@ -27,7 +27,10 @@ ru:
       title: "Регистрация"
       submit: "Зарегистрироваться"
     show:
+      title: "Профиль пользователя"
       edit_button: "Редактировать"
+    index:
+      title: "Список пользователей"
   banks:
     signup:
       title: "Регистрация"

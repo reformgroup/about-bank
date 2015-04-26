@@ -1,5 +1,7 @@
 class BanksController < ApplicationController
   
+  layout "dashboard", except: :signup
+  
   def create
     @bank = Bank.new(bank_params)
     if @bank.save

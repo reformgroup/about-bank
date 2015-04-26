@@ -1,3 +1,36 @@
+//== Colors
+//
+
+$brand-primary: #04B3B3 !default;
+$brand-success: #8CC152 !default;
+$brand-info:    #3BAFDA !default;
+$brand-warning: #F6BB42 !default;
+$brand-danger:  #DA4453 !default;
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+$state-success-text:             #3c763d !default;
+$state-success-bg:               #b9df90 !default;
+$state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%) !default;
+
+$state-info-text:                #31708f !default;
+$state-info-bg:                  #7cd1ef !default;
+$state-info-border:              darken(adjust-hue($state-info-bg, -10), 7%) !default;
+
+$state-warning-text:             #8a6d3b !default;
+$state-warning-bg:               #8a6d3b !default;
+$state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+
+$state-danger-text:              #a94442 !default;
+$state-danger-bg:                #f2838f !default;
+$state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%) !default;
+
+//== Forms
+//
+$input-border-focus: $brand-primary;
+
 @import "bootstrap";
 @import "colors";
 @import "font-awesome-sprockets";
@@ -16,7 +49,7 @@ $grayMediumLight: #eaeaea;
 /* navbar */
 
 .navbar-custom {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
 /* universal */
@@ -26,7 +59,7 @@ html {
 }
 
 body {
-	padding-top: 100px;
+	padding-top: 80px;
 }
 
 section {
@@ -47,7 +80,7 @@ textarea {
 
 select.date-select {
 	display: inline-block;
-    width: auto;
+  width: auto;
 }
 
 /* forms */
@@ -59,33 +92,33 @@ select.date-select {
 /* select input style */
 
 select {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-padding-end: 20px;
-    -moz-padding-end: 20px;
-    -webkit-padding-start: 2px;
-    -moz-padding-start: 2px;
-    background-color: #F07575; /* fallback color if gradients are not supported */
-    background-image: image-url("select-arrow.png"), -webkit-linear-gradient(top, #E5E5E5, #F4F4F4); /* For Chrome and Safari */
-    background-image: image-url("select-arrow.png"), -moz-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Fx (3.6 to 15) */
-    background-image: image-url("select-arrow.png"), -ms-linear-gradient(top, #E5E5E5, #F4F4F4); /* For pre-releases of IE 10*/
-    background-image: image-url("select-arrow.png"), -o-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Opera (11.1 to 12.0) */ 
-    background-image: image-url("select-arrow.png"), linear-gradient(to bottom, #E5E5E5, #F4F4F4); /* Standard syntax; must be last */
-    background-position: center right;
-    background-repeat: no-repeat;
-    border: 1px solid #AAA;
-    border-radius: 2px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    color: #555;
-    font-size: inherit;
-    margin: 0;
-    overflow: hidden;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-padding-end: 20px;
+  -moz-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -moz-padding-start: 2px;
+  background-color: #F07575; /* fallback color if gradients are not supported */
+  background-image: image-url("select-arrow.png"), -webkit-linear-gradient(top, #E5E5E5, #F4F4F4); /* For Chrome and Safari */
+  background-image: image-url("select-arrow.png"), -moz-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Fx (3.6 to 15) */
+  background-image: image-url("select-arrow.png"), -ms-linear-gradient(top, #E5E5E5, #F4F4F4); /* For pre-releases of IE 10*/
+  background-image: image-url("select-arrow.png"), -o-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Opera (11.1 to 12.0) */ 
+  background-image: image-url("select-arrow.png"), linear-gradient(to bottom, #E5E5E5, #F4F4F4); /* Standard syntax; must be last */
+  background-position: center right;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  border-radius: 2px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  color: #555;
+  font-size: inherit;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* miscellaneous */

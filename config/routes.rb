@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root                          'main_pages#individual'
   get     '/company',       to: 'main_pages#company'
   get     '/bank',          to: 'main_pages#bank'
@@ -7,11 +7,9 @@ Rails.application.routes.draw do
   get     '/banks/signup',  to: 'banks#signup'
   get     '/login',         to: 'sessions#new'
   delete  '/logout',        to: 'sessions#destroy'
-  get     '/me/:id',        to: 'users#show_me', as: 'me'
-  get     '/me/:id/edit',   to: 'users#edit_me', as: 'edit_me'
   
   resources :users
-  
+  resources :my_profile
   resources :banks
   resources :sessions, only: [:new, :create, :destroy]
   

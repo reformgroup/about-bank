@@ -66,32 +66,24 @@ module ApplicationHelper
   end
   
   def dashboard_root_path
-    case current_user.role
+    case current_role
     when "superadmin", "admin", "bank_admin", "bank_user" then users_path
     else user_path(current_user)
     end
   end
   
-  def sidebar_item(link_text, link_path, icon, options)
+  def sidebar_item(link_text, link_path, icon_name, options)
     options[:available_for_roles] ||= []
     options[:active_controllers]  ||= []
     options[:active_paths]        ||= []
     
-    if options[:available_for_roles].include? current_user.role.to_sym
-      if (options[:active_controllers].include?(controller_name.to_sym) || options[:active_paths].include?(request.path)) && (options[:active_actions].nil? ||  options[:active_actions].include?(action_name.to_sym))
+    if current_role_include?(*options[:available_for_roles]) || options[:available_for_roles].empty?
+      if (options[:active_controllers].include?(controller_name) || options[:active_paths].include?(request.path)) && (options[:active_actions].empty? ||  options[:active_actions].include?(action_name))
         options[:class] = "active"
       end
       link_to(link_path, options.slice(:class)) do
-        content_tag(:i, nil, class: "fa fa-#{icon} fa-fw").concat(link_text).html_safe
+        icon icon_name, link_text
       end
     end
-  end
-  
-  def all_admin_roles
-    [:superadmin, :admin]
-  end
-  
-  def all_bank_roles
-    [:bank_admin, :bank_user]
   end
 end

@@ -29,6 +29,21 @@ module SessionsHelper
       end
     end
   end
+  
+  # Returns the current user's role.
+  def current_role
+    @current_role ||= current_user.role if logged_in?
+  end
+  
+  # Returns true if the given role is the current user's role.
+  def current_role?(role)
+    current_role == role
+  end
+  
+  # Returns true if one of the given roles is the current user's role.
+  def current_role_include?(*roles)
+    roles.include? current_role
+  end
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?

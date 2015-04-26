@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-custom">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -29,25 +29,19 @@
 					<li id="fat-menu" class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "#{current_user.first_name} #{current_user.last_name}" %> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><%= link_to '<i class="fa fa-user fa-fw text-muted"></i>&nbsp;'.concat(t(".profile")).html_safe, user_path(current_user) %></li>
-              <li><%= link_to '<i class="fa fa-wrench fa-fw text-muted"></i>&nbsp;'.concat(t(".dashboard")).html_safe, dashboard_root_path %></li>
+							<li><%= link_to icon("user", t(".profile"), class: "fa-fw text-muted"), my_profile_path(current_user) %></li>
+              <li><%= link_to icon("wrench", t(".dashboard"), class: "fa-fw text-muted"), dashboard_root_path %></li>
 							<li class="divider"></li>
-							<li><%= link_to '<i class="fa fa-sign-out fa-fw text-muted"></i>&nbsp;'.concat(t(".logout")).html_safe, logout_path, method: "delete" %></li>
+							<li><%= link_to icon("sign-out", t(".logout"), class: "fa-fw text-muted"), logout_path, method: "delete" %></li>
 						</ul>
 					</li>
 				<% else %>
-          <li><%= link_to t(".signup"), signup_path %></li>
+          <% unless controller_name == "main_pages" && action_name == "bank" %>
+            <li><%= link_to t(".signup"), signup_path %></li>
+          <% end %>
           <li><%= link_to t(".login"), login_path %></li>
 				<% end %>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
-  <div class="container">
-      <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-              <li><a href="#">One</a></li>
-              <li><a href="#">Two</a></li>
-          </ul>
-      </div><!--/.nav-collapse -->
-  </div>
 </nav>

@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      case user.role
+      case current_role
       when "superadmin", "admin" then redirect_to users_path
-      when "user", "admin" then redirect_to user
+      when "user" then redirect_to my_profile(user)
       end
       # redirect_back_or user
     else
