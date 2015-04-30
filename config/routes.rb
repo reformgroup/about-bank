@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
-  get 'users/new'
 
-  root  'main_pages#individuals'
-  match '/individuals',   to: 'main_pages#individuals', via: 'get'
-  match '/companies',     to: 'main_pages#companies',   via: 'get'
-  match '/banks',         to: 'main_pages#banks',       via: 'get'
-  match '/signup',        to: 'users#new',              via: 'get'
-  match '/banks/signup',  to: 'banks#new',              via: 'get'
+  root                          'main_pages#individual'
+  get     '/company',       to: 'main_pages#company'
+  get     '/bank',          to: 'main_pages#bank'
+  get     '/signup',        to: 'users#signup'
+  get     '/banks/signup',  to: 'banks#signup'
+  get     '/login',         to: 'sessions#new'
+  delete  '/logout',        to: 'sessions#destroy'
+  
+  namespace :admin do
+    resources :users
+  end
+  
+  resources :users
+  resources :my_profile
+  resources :banks
+  resources :sessions, only: [:new, :create, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
