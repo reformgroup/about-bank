@@ -2,18 +2,22 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  last_name       :string           not null
-#  first_name      :string           not null
-#  middle_name     :string
-#  email           :string           not null
-#  gender          :integer          not null
-#  birth_date      :date             not null
-#  password_digest :string           not null
-#  remember_digest :string
-#  role            :integer          not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :integer          not null, primary key
+#  last_name           :string           not null
+#  first_name          :string           not null
+#  middle_name         :string
+#  email               :string           not null
+#  gender              :integer          not null
+#  birth_date          :date             not null
+#  password_digest     :string           not null
+#  remember_digest     :string
+#  role                :integer          not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 require 'spec_helper'

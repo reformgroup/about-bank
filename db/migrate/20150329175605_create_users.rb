@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest, null: false
       t.string :remember_digest
       t.integer :role, null: false
+      t.attachment :avatar
       
       t.timestamps null: false
     end

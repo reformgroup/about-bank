@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       flash[:success] = t ".flash.success.message"
       redirect_to @user
     else
-      render 'signup'
+      render "signup"
     end
   end
   
@@ -34,9 +34,15 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path
+  end 
   
   def signup
     @user = User.new
@@ -45,11 +51,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :gender, :birth_date)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :gender, :birth_date, :avatar)
   end
   
   def main_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :gender, :birth_date)
+    params.require(:user).permit(:first_name, :last_name, :email, :gender, :birth_date, :avatar)
   end
 
   # Before filters

@@ -16,6 +16,7 @@ ru:
         birth_date: "Дата рождения"
         gender: "Пол"
         role: "Доступ"
+        avatar: "Фото профиля"
         password: "Пароль"
         password_confirmation: "Ещё раз пароль"
         remember_me: "Запомнить меня"

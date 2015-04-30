@@ -26,7 +26,7 @@ class MyProfileController < ApplicationController
   private
   
   def main_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :gender, :birth_date)
+    params.require(:user).permit(:first_name, :last_name, :email, :gender, :birth_date, :avatar)
   end
   
   # Before filters

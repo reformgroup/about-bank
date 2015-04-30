@@ -2,45 +2,60 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  last_name       :string           not null
-#  first_name      :string           not null
-#  middle_name     :string
-#  email           :string           not null
-#  gender          :integer          not null
-#  birth_date      :date             not null
-#  password_digest :string           not null
-#  remember_digest :string
-#  role            :integer          not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :integer          not null, primary key
+#  last_name           :string           not null
+#  first_name          :string           not null
+#  middle_name         :string
+#  email               :string           not null
+#  gender              :integer          not null
+#  birth_date          :date             not null
+#  password_digest     :string           not null
+#  remember_digest     :string
+#  role                :integer          not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  VALID_NAME_REGEX = /\A[[:alpha:]]+[[:alpha:] \-']*[[:alpha:]]+\z/i
-
+  VALID_NAME_REGEX  = /\A[[:alpha:]]+[[:alpha:] \-']*[[:alpha:]]+\z/i
+  AVATAR_PATH       = "/system/users/avatars/:class/:attachment/:id_partition/:style"
+  
   attr_accessor :remember_token
-
+  
   has_many :bank_users
   has_many :banks, through: :bank_users
-  
+  has_secure_password
+  has_attached_file :avatar, 
+    { 
+      styles: { original: "120x120#", medium: "50x50#", thumb: "40x40#" }, 
+      default_url: "/images/users/avatars/:style/missing.png",
+      url: "#{AVATAR_PATH}/:hash.:extension",
+      path: ":rails_root/public#{AVATAR_PATH}/:hash.:extension",
+      hash_data: AVATAR_PATH,
+      hash_secret: "A13S4Dtu54y5g63d363sa3JH30Ff9dyH56lih6JguyHY736crtyf45dx"
+    }
+     
   validates :last_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
   validates :first_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }
-  validates :middle_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }, :if => :middle_name
+  validates :middle_name, presence: true, length: { maximum: 50 }, format: { with: VALID_NAME_REGEX }, if: :middle_name
   validates :gender, presence: true, length: { maximum: 6 }
   validates_date :birth_date, presence: true, on_or_before: lambda { User.not_younger }, on_or_after: lambda { User.not_older }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, :if => :password
-  validates :password_confirmation, presence: true, :if => :password_confirmation
-  validates :role, presence: true, :if => :role
+  validates :password, presence: true, length: { minimum: 6 }, if: :password
+  validates :password_confirmation, presence: true, if: :password_confirmation
+  validates :role, presence: true, if: :role
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   before_save { email.downcase! }
   before_save :set_name
-  after_initialize :set_default_role, :if => :new_record?
-  
-  has_secure_password
+  after_initialize :set_default_role, if: :new_record?
+    
   enum gender: [:male, :female, :other]
   enum role: [:superadmin, :admin, :bank_admin, :bank_user, :user]
   

@@ -72,6 +72,15 @@ module ApplicationHelper
     end
   end
   
+  def user_label(user)
+    role = user.role
+    case role
+    when "superadmin", "admin" then content_tag(:span, role, class: "label label-default")
+    when "bank_admin", "bank_user" then content_tag(:span, role, class: "label label-success")
+    when "user" then content_tag(:span, role, class: "label label-warning")
+    end
+  end
+  
   def sidebar_item(link_text, link_path, icon_name, options)
     options[:available_for_roles] ||= []
     options[:active_controllers]  ||= []
@@ -82,7 +91,7 @@ module ApplicationHelper
         options[:class] = "active"
       end
       link_to(link_path, options.slice(:class)) do
-        icon icon_name, link_text
+        icon icon_name, link_text, class: "fa-fw"
       end
     end
   end

@@ -10,9 +10,22 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
     role "user"
+    avatar { Faker::Avatar.image }
     
     factory :superadmin do
       role "superadmin"
+    end
+    
+    factory :me do
+      first_name "Foo"
+      last_name "Bar"
+      email "test@mail.com"
+      birth_date { 18.years.ago - Faker::Number.number(3).to_i.days }
+      gender "male"
+      password "123123"
+      password_confirmation "123123"
+      role "superadmin"
+      avatar { Faker::Avatar.image }
     end
   end
   

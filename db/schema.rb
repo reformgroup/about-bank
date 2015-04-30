@@ -34,17 +34,21 @@ ActiveRecord::Schema.define(version: 20150407075946) do
   add_index "banks", ["name", "website"], name: "index_banks_on_name_and_website"
 
   create_table "users", force: :cascade do |t|
-    t.string   "last_name",       null: false
-    t.string   "first_name",      null: false
+    t.string   "last_name",           null: false
+    t.string   "first_name",          null: false
     t.string   "middle_name"
-    t.string   "email",           null: false
-    t.integer  "gender",          null: false
-    t.date     "birth_date",      null: false
-    t.string   "password_digest", null: false
+    t.string   "email",               null: false
+    t.integer  "gender",              null: false
+    t.date     "birth_date",          null: false
+    t.string   "password_digest",     null: false
     t.string   "remember_digest"
-    t.integer  "role",            null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "role",                null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email"
