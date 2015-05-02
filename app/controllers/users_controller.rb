@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, except: :signup
   before_action :correct_user,   only: [:show, :edit, :update]
   
   layout "dashboard", except: :signup
@@ -50,12 +50,30 @@ class UsersController < ApplicationController
 
   private
 
+  # All params.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :gender, :birth_date, :avatar)
+    params.require(:user).permit( :last_name, 
+                                  :first_name, 
+                                  :middle_name, 
+                                  :email, 
+                                  :gender, 
+                                  :birth_date, 
+                                  :password, 
+                                  :password_confirmation, 
+                                  :role, 
+                                  :avatar)
   end
   
+  # Params without password.
   def main_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :gender, :birth_date, :avatar)
+    params.require(:user).permit( :last_name, 
+                                  :first_name, 
+                                  :middle_name, 
+                                  :email, 
+                                  :gender, 
+                                  :birth_date,
+                                  :role, 
+                                  :avatar)
   end
 
   # Before filters

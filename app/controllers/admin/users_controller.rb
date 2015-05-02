@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :logged_in_user
   before_action :correct_user,   only: [:show, :edit, :update]
   
   layout "dashboard"
@@ -44,7 +44,8 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-  # All params
+  
+  # All params.
   def user_params
     params.require(:user).permit( :last_name, 
                                   :first_name, 
@@ -58,7 +59,7 @@ class Admin::UsersController < ApplicationController
                                   :avatar)
   end
   
-  # Params without password
+  # Params without password.
   def main_user_params
     params.require(:user).permit( :last_name, 
                                   :first_name, 

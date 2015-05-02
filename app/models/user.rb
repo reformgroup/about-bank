@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   VALID_NAME_REGEX  = /\A[[:alpha:]]+[[:alpha:] \-']*[[:alpha:]]+\z/i
-  AVATAR_PATH       = "/system/users/avatars/:class/:attachment/:id_partition/:style"
+  AVATAR_PATH       = "/system/users/avatars/:id_partition/:style"
   
   attr_accessor :remember_token
   
